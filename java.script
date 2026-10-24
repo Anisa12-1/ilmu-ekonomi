@@ -1,0 +1,868 @@
+
+"use strict";
+
+/* =====================================
+   1. MENU NAVIGASI UNTUK HP
+===================================== */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", function () {
+    const isOpen = navLinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Tutup menu" : "Buka menu"
+    );
+    menuToggle.textContent = isOpen ? "×" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Buka menu");
+        menuToggle.textContent = "☰";
+    });
+});
+
+
+/* =====================================
+   2. PENCARIAN DAN FILTER MATERI
+===================================== */
+
+const searchInput = document.getElementById("searchInput");
+const materialCards = [
+    ...document.querySelectorAll(".material-card")
+];
+const filterButtons = [
+    ...document.querySelectorAll(".filter-btn")
+];
+const emptyMessage = document.getElementById("emptyMessage");
+
+let activeFilter = "semua";
+
+function filterMaterials() {
+    const keyword = searchInput.value
+        .trim()
+        .toLocaleLowerCase("id-ID");
+
+    let visibleCount = 0;
+
+    materialCards.forEach(function (card) {
+        const matchesCategory =
+            activeFilter === "semua" ||
+            card.dataset.category === activeFilter;
+
+        const matchesKeyword =
+            card.textContent.toLocaleLowerCase("id-ID")
+                .includes(keyword);
+
+        const visible = matchesCategory && matchesKeyword;
+
+        card.hidden = !visible;
+
+        if (visible) visibleCount++;
+    });
+
+    emptyMessage.hidden = visibleCount !== 0;
+}
+
+searchInput.addEventListener("input", filterMaterials);
+
+filterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        activeFilter = button.dataset.filter;
+
+        filterButtons.forEach(function (item) {
+            item.classList.toggle("active", item === button);
+        });
+
+        filterMaterials();
+    });
+});
+
+
+/* =====================================
+   3. PEMBAHASAN MATERI LEBIH LENGKAP
+===================================== */
+
+const lessons = {
+    kelangkaan: {
+        title: "Kelangkaan dan Pilihan Ekonomi",
+        paragraphs: [
+            "Kelangkaan merupakan masalah dasar ekonomi. Kebutuhan manusia beragam, sedangkan sumber daya seperti uang, waktu, tenaga, dan bahan baku memiliki keterbatasan.",
+            "Karena sumber daya terbatas, manusia harus membuat pilihan. Pilihan yang baik mempertimbangkan kebutuhan, manfaat, biaya, serta konsekuensi jangka pendek dan panjang.",
+            "Konsep biaya peluang menjelaskan nilai alternatif terbaik yang dikorbankan ketika seseorang memilih suatu tindakan."
+        ],
+        heading: "Cara menerapkannya",
+        points: [
+            "Tentukan kebutuhan yang paling mendesak.",
+            "Bandingkan manfaat dari setiap pilihan.",
+            "Perhatikan biaya dan kesempatan yang dikorbankan.",
+            "Evaluasi apakah keputusan tersebut sesuai tujuan."
+        ],
+        example: "Misalnya, uang Rp100.000 digunakan untuk membeli kebutuhan kuliah. Kamu perlu membandingkan buku yang diperlukan dengan barang lain yang bisa dibeli nanti."
+    },
+
+    kebutuhan: {
+        title: "Kebutuhan dan Keinginan Manusia",
+        paragraphs: [
+            "Kebutuhan adalah sesuatu yang diperlukan untuk mempertahankan kehidupan atau mencapai tujuan tertentu. Keinginan adalah sesuatu yang ingin dimiliki, tetapi tingkat kepentingannya dapat berbeda-beda.",
+            "Kebutuhan dapat dikelompokkan menurut intensitasnya, seperti primer, sekunder, dan tersier. Pengelompokan tersebut dapat berubah sesuai keadaan seseorang dan lingkungan sosialnya.",
+            "Kebutuhan juga dapat dibedakan berdasarkan waktu pemenuhan, sifat, dan pihak yang memerlukannya."
+        ],
+        heading: "Membuat skala prioritas",
+        points: [
+            "Dahulukan makanan, tempat tinggal, kesehatan, dan kebutuhan penting lainnya.",
+            "Sisihkan dana untuk pendidikan dan transportasi yang diperlukan.",
+            "Rencanakan kebutuhan masa depan.",
+            "Tunda keinginan yang belum sesuai kemampuan."
+        ],
+        example: "Jika memiliki pendapatan terbatas, membayar kebutuhan pokok dan biaya kuliah biasanya lebih penting daripada membeli aksesori baru."
+    },
+
+    prinsip: {
+        title: "Prinsip Ekonomi dan Efisiensi",
+        paragraphs: [
+            "Prinsip ekonomi berkaitan dengan upaya mengambil keputusan secara rasional dengan mempertimbangkan sumber daya, biaya, manfaat, dan tujuan.",
+            "Efisiensi berarti menggunakan sumber daya dengan baik untuk menghasilkan manfaat tertentu atau memperoleh hasil yang lebih baik dari sumber daya yang tersedia.",
+            "Keputusan yang efisien tidak selalu berarti memilih harga termurah. Kualitas, keamanan, ketahanan, dan waktu juga perlu diperhitungkan."
+        ],
+        heading: "Penerapan prinsip ekonomi",
+        points: [
+            "Bandingkan harga dan kualitas barang.",
+            "Kurangi pemborosan bahan dan waktu.",
+            "Gunakan anggaran sesuai kebutuhan.",
+            "Evaluasi apakah manfaat sebanding dengan biaya."
+        ],
+        example: "Sebuah tas yang sedikit lebih mahal tetapi tahan lama mungkin lebih hemat dalam jangka panjang daripada tas murah yang cepat rusak."
+    },
+
+    kegiatan: {
+        title: "Produksi, Distribusi, dan Konsumsi",
+        paragraphs: [
+            "Produksi adalah kegiatan menghasilkan atau menambah nilai guna barang dan jasa. Faktor produksi antara lain sumber daya alam, tenaga kerja, modal, dan kemampuan kewirausahaan.",
+            "Distribusi adalah kegiatan menyalurkan barang atau jasa dari produsen hingga dapat dijangkau konsumen. Kegiatan ini mencakup transportasi, pergudangan, dan perdagangan.",
+            "Konsumsi adalah kegiatan menggunakan barang atau jasa untuk memenuhi kebutuhan. Konsumsi juga berperan dalam membentuk permintaan pasar."
+        ],
+        heading: "Contoh rantai ekonomi",
+        points: [
+            "Petani memproduksi padi.",
+            "Penggilingan mengolah padi menjadi beras.",
+            "Pedagang mendistribusikan beras.",
+            "Keluarga membeli beras untuk dikonsumsi."
+        ],
+        example: "Dalam usaha baso aci, pemilik usaha membeli bahan, mengolah produk, mengirim pesanan, dan pelanggan membeli untuk dikonsumsi."
+    },
+
+    pasar: {
+        title: "Permintaan dan Penawaran",
+        paragraphs: [
+            "Permintaan menunjukkan jumlah barang yang ingin dan mampu dibeli konsumen pada berbagai tingkat harga dalam periode tertentu.",
+            "Penawaran menunjukkan jumlah barang yang ingin dan mampu dijual produsen pada berbagai tingkat harga dalam periode tertentu.",
+            "Dengan faktor lain tetap, harga yang lebih tinggi biasanya berkaitan dengan jumlah yang diminta lebih rendah dan jumlah yang ditawarkan lebih tinggi.",
+            "Keseimbangan pasar terjadi ketika jumlah yang diminta sama dengan jumlah yang ditawarkan. Kondisi nyata bisa berubah karena pendapatan, selera, teknologi, biaya, dan kebijakan."
+        ],
+        heading: "Faktor yang memengaruhi pasar",
+        points: [
+            "Harga barang itu sendiri.",
+            "Pendapatan dan selera konsumen.",
+            "Harga barang pengganti dan pelengkap.",
+            "Biaya bahan baku dan teknologi produksi.",
+            "Jumlah penjual dan pembeli."
+        ],
+        example: "Ketika panen cabai berkurang, persediaan dapat menurun. Jika permintaan tetap tinggi, harga cabai cenderung naik."
+    },
+
+    harga: {
+        title: "Pasar dan Pembentukan Harga",
+        paragraphs: [
+            "Pasar tidak selalu berupa bangunan fisik. Pasar dapat berupa toko online, aplikasi, pasar tradisional, atau mekanisme lain yang mempertemukan penjual dan pembeli.",
+            "Harga menjadi salah satu sinyal yang membantu konsumen dan produsen mengambil keputusan. Harga juga dapat dipengaruhi persaingan, kualitas, lokasi, informasi, dan regulasi.",
+            "Pasar yang berbeda dapat memiliki karakteristik yang berbeda pula, mulai dari persaingan sempurna hingga monopoli."
+        ],
+        heading: "Hal yang perlu dipahami",
+        points: [
+            "Harga tidak selalu sama di semua tempat.",
+            "Kualitas dan layanan memengaruhi nilai suatu barang.",
+            "Persaingan dapat memengaruhi harga dan pilihan konsumen.",
+            "Informasi yang baik membantu pembeli mengambil keputusan."
+        ],
+        example: "Harga buah di dekat sentra produksi bisa berbeda dari harga di toko yang menanggung biaya pengiriman, penyimpanan, dan sewa."
+    },
+
+    perusahaan: {
+        title: "Perusahaan dan Biaya Produksi",
+        paragraphs: [
+            "Perusahaan mengubah faktor produksi menjadi barang atau jasa yang ditawarkan kepada konsumen. Tujuan usaha dapat meliputi memperoleh laba, bertahan, berkembang, dan memberikan manfaat bagi pelanggan.",
+            "Biaya tetap relatif tidak berubah terhadap jumlah produksi dalam rentang tertentu, misalnya sewa bulanan. Biaya variabel berubah mengikuti tingkat produksi, misalnya bahan baku.",
+            "Biaya total adalah jumlah biaya tetap dan biaya variabel. Memahami biaya membantu pengusaha menentukan harga dan mengevaluasi kinerja usaha."
+        ],
+        heading: "Komponen biaya usaha",
+        points: [
+            "Bahan baku dan kemasan.",
+            "Tenaga kerja.",
+            "Sewa dan utilitas.",
+            "Pengiriman, pemasaran, dan biaya platform.",
+            "Penyusutan alat dan biaya lain yang relevan."
+        ],
+        example: "Penjual makanan perlu menghitung seluruh biaya, bukan hanya harga tepung dan bumbu, agar keuntungan tidak terlihat lebih besar daripada keadaan sebenarnya."
+    },
+
+    pdb: {
+        title: "Pertumbuhan Ekonomi dan PDB",
+        paragraphs: [
+            "Produk Domestik Bruto atau PDB adalah nilai barang dan jasa akhir yang diproduksi di wilayah suatu negara selama periode tertentu.",
+            "PDB nominal menggunakan harga pada periode yang diukur. PDB riil menyesuaikan perubahan harga sehingga lebih membantu untuk melihat perubahan volume produksi dari waktu ke waktu.",
+            "Pertumbuhan ekonomi biasanya diukur dari persentase perubahan PDB riil. Akan tetapi, PDB tidak menunjukkan secara lengkap distribusi pendapatan, kualitas lingkungan, atau seluruh aspek kesejahteraan."
+        ],
+        heading: "Mengapa pertumbuhan penting?",
+        points: [
+            "Membantu menilai perkembangan kegiatan ekonomi.",
+            "Menjadi salah satu pertimbangan perencanaan kebijakan.",
+            "Dapat berkaitan dengan peluang kerja dan pendapatan.",
+            "Perlu dibaca bersama indikator kesejahteraan lainnya."
+        ],
+        example: "Jika produksi barang dan jasa meningkat setelah memperhitungkan perubahan harga, PDB riil dapat tumbuh. Manfaatnya bagi masyarakat bergantung pula pada bagaimana hasil pertumbuhan tersebut tersebar."
+    },
+
+    inflasi: {
+        title: "Inflasi dan Daya Beli",
+        paragraphs: [
+            "Inflasi adalah kenaikan harga barang dan jasa secara umum dan berkelanjutan. Kenaikan harga satu barang saja belum tentu berarti terjadi inflasi umum.",
+            "Inflasi dapat dipengaruhi peningkatan permintaan, kenaikan biaya produksi, gangguan pasokan, dan faktor lainnya.",
+            "Inflasi memengaruhi daya beli. Jika pendapatan tidak bertambah sebanding dengan kenaikan harga, jumlah barang yang dapat dibeli dengan pendapatan tersebut dapat berkurang."
+        ],
+        heading: "Cara menghadapi perubahan harga",
+        points: [
+            "Catat pengeluaran utama.",
+            "Bandingkan harga dan ukuran produk.",
+            "Prioritaskan kebutuhan penting.",
+            "Tingkatkan keterampilan untuk memperluas peluang pendapatan.",
+            "Evaluasi anggaran secara berkala."
+        ],
+        example: "Jika harga kebutuhan bulanan naik, keluarga dapat meninjau anggaran dan mencari alternatif produk yang sesuai kualitas serta kebutuhan."
+    },
+
+    pengangguran: {
+        title: "Pengangguran dan Kesempatan Kerja",
+        paragraphs: [
+            "Pengangguran umumnya merujuk pada orang yang termasuk angkatan kerja, tidak bekerja, dan mencari atau tersedia untuk bekerja sesuai definisi statistik yang digunakan.",
+            "Penyebab pengangguran dapat meliputi perlambatan ekonomi, ketidaksesuaian keterampilan, perubahan teknologi, serta ketidakcocokan lokasi dan lowongan.",
+            "Pendidikan, pelatihan, informasi lowongan, dan penciptaan usaha dapat membantu memperbaiki peluang kerja, tetapi hasilnya juga bergantung pada kondisi pasar tenaga kerja."
+        ],
+        heading: "Upaya meningkatkan kesiapan kerja",
+        points: [
+            "Mempelajari keterampilan yang dibutuhkan industri.",
+            "Meningkatkan kemampuan digital dan komunikasi.",
+            "Membangun portofolio dan pengalaman.",
+            "Mengikuti pelatihan yang relevan.",
+            "Memahami hak serta kewajiban pekerja."
+        ],
+        example: "Lulusan akuntansi dapat memperkuat kemampuan Excel, administrasi, pembukuan, dan pengolahan data untuk memperluas pilihan pekerjaan."
+    },
+
+    keuangan: {
+        title: "Menabung dan Mengelola Anggaran",
+        paragraphs: [
+            "Anggaran adalah rencana penggunaan uang dalam periode tertentu. Anggaran membantu seseorang memahami dari mana uang berasal dan ke mana uang digunakan.",
+            "Menabung berarti menyisihkan sebagian pendapatan untuk tujuan mendatang. Dana darurat dapat membantu menghadapi pengeluaran tidak terduga.",
+            "Besarnya tabungan yang realistis bergantung pada pendapatan, kebutuhan pokok, tanggungan, kewajiban, dan tujuan masing-masing orang."
+        ],
+        heading: "Langkah mengelola uang",
+        points: [
+            "Catat pendapatan dan seluruh pengeluaran.",
+            "Pisahkan kebutuhan, keinginan, dan kewajiban.",
+            "Tentukan tujuan tabungan yang realistis.",
+            "Sisihkan uang sesuai kemampuan secara konsisten.",
+            "Tinjau kembali anggaran saat kondisi berubah."
+        ],
+        example: "Jika pendapatan Rp2.000.000 dan pengeluaran Rp1.700.000, sisa Rp300.000 belum tentu seluruhnya dapat ditabung jika masih ada kewajiban yang belum dicatat."
+    },
+
+    bisnis: {
+        title: "Modal, Omzet, dan Laba Usaha",
+        paragraphs: [
+            "Modal adalah sumber daya yang digunakan untuk memulai atau menjalankan usaha, misalnya uang, peralatan, bahan, dan persediaan.",
+            "Omzet merupakan total nilai penjualan dalam periode tertentu. Omzet berbeda dari laba karena usaha masih harus menanggung biaya.",
+            "Laba sederhana dapat dihitung dengan mengurangi total biaya dari pendapatan penjualan. Perhitungan usaha yang lebih lengkap juga perlu mempertimbangkan persediaan, pajak, penyusutan, retur, dan biaya lain yang relevan."
+        ],
+        heading: "Rumus dasar usaha",
+        points: [
+            "Omzet = jumlah terjual × harga jual per unit.",
+            "Laba sederhana = omzet − total biaya.",
+            "Margin laba = laba ÷ omzet × 100%, jika omzet lebih dari nol.",
+            "Arus kas perlu dipantau terpisah dari laba."
+        ],
+        example: "Jika 100 produk terjual seharga Rp10.000 per produk, omzetnya Rp1.000.000. Bila seluruh biaya yang dihitung Rp700.000, laba sederhana adalah Rp300.000."
+    },
+
+    syariah: {
+        title: "Dasar Ekonomi Syariah",
+        paragraphs: [
+            "Ekonomi syariah membahas kegiatan ekonomi yang berlandaskan prinsip-prinsip Islam. Pembahasannya mencakup transaksi, pembiayaan, distribusi harta, tanggung jawab sosial, dan etika bisnis.",
+            "Prinsip penting antara lain keadilan, kerelaan para pihak, kejelasan akad, kejujuran, dan menghindari riba serta unsur terlarang lainnya sesuai ketentuan syariah.",
+            "Berbagai akad mempunyai mekanisme yang berbeda. Karena itu, produk keuangan perlu dipahami berdasarkan struktur akad, risiko, biaya, dan ketentuan yang berlaku."
+        ],
+        heading: "Contoh pembahasan",
+        points: [
+            "Jual beli: barang dan harga harus jelas sesuai ketentuan akad.",
+            "Mudharabah: kerja sama usaha dengan pembagian keuntungan sesuai kesepakatan dan ketentuan akad.",
+            "Musyarakah: kerja sama yang melibatkan kontribusi para mitra.",
+            "Zakat dan infak: berkaitan dengan distribusi harta dan kepedulian sosial."
+        ],
+        example: "Sebelum menggunakan pembiayaan syariah, pelajari jenis akad, kewajiban pembayaran, biaya, risiko, dan kesesuaiannya dengan ketentuan syariah."
+    },
+
+    sosial: {
+        title: "Zakat, Infak, dan Keadilan Sosial",
+        paragraphs: [
+            "Zakat merupakan kewajiban dengan persyaratan dan ketentuan tertentu dalam Islam. Infak adalah pengeluaran harta untuk kebaikan, sedangkan sedekah memiliki cakupan kebaikan yang lebih luas.",
+            "Instrumen sosial tersebut dapat membantu penerima yang berhak, memperkuat kepedulian masyarakat, dan mendukung kegiatan sosial yang bermanfaat.",
+            "Dampak ekonomi dari program sosial dipengaruhi oleh pengelolaan dana, ketepatan sasaran, transparansi, dan keberlanjutan program."
+        ],
+        heading: "Prinsip pengelolaan yang baik",
+        points: [
+            "Menyalurkan dana sesuai ketentuan masing-masing.",
+            "Menjaga transparansi dan akuntabilitas.",
+            "Memperhatikan kebutuhan penerima.",
+            "Mengevaluasi manfaat program secara berkala."
+        ],
+        example: "Bantuan pendidikan yang dikelola secara tepat dapat membantu penerima melanjutkan pendidikan dan meningkatkan peluangnya di masa depan."
+    },
+
+    sistem: {
+        title: "Sistem Ekonomi",
+        paragraphs: [
+            "Sistem ekonomi menjelaskan cara masyarakat mengatur produksi, distribusi, dan konsumsi sumber daya.",
+            "Dalam sistem ekonomi pasar, keputusan ekonomi banyak dipengaruhi interaksi konsumen dan perusahaan. Dalam sistem ekonomi komando, pemerintah memiliki peran utama dalam menentukan banyak keputusan produksi dan alokasi.",
+            "Sistem ekonomi campuran menggabungkan mekanisme pasar dengan peran pemerintah. Banyak negara menggunakan kombinasi mekanisme tersebut dalam bentuk yang berbeda."
+        ],
+        heading: "Perbandingan sederhana",
+        points: [
+            "Pasar: harga dan keputusan banyak dipengaruhi interaksi pasar.",
+            "Komando: keputusan utama banyak ditentukan pemerintah.",
+            "Campuran: pasar berjalan bersama regulasi dan layanan pemerintah."
+        ],
+        example: "Dalam sistem campuran, perusahaan swasta dapat menjual barang, sedangkan pemerintah menyediakan layanan publik, mengatur standar keselamatan, dan menangani masalah yang tidak terselesaikan dengan baik oleh pasar."
+    }
+};
+
+const lessonModal = document.getElementById("lessonModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const closeModal = document.getElementById("closeModal");
+const modalDone = document.getElementById("modalDone");
+let lastFocusedElement = null;
+
+function addParagraph(parent, text) {
+    const p = document.createElement("p");
+    p.textContent = text;
+    parent.appendChild(p);
+}
+
+function openLesson(key) {
+    const lesson = lessons[key];
+    if (!lesson) return;
+
+    lastFocusedElement = document.activeElement;
+    modalTitle.textContent = lesson.title;
+    modalBody.replaceChildren();
+
+    lesson.paragraphs.forEach(function (paragraph) {
+        addParagraph(modalBody, paragraph);
+    });
+
+    const heading = document.createElement("h3");
+    heading.textContent = lesson.heading;
+    modalBody.appendChild(heading);
+
+    const list = document.createElement("ul");
+
+    lesson.points.forEach(function (point) {
+        const li = document.createElement("li");
+        li.textContent = point;
+        list.appendChild(li);
+    });
+
+    modalBody.appendChild(list);
+
+    const exampleHeading = document.createElement("h3");
+    exampleHeading.textContent = "Contoh dalam kehidupan sehari-hari";
+    modalBody.appendChild(exampleHeading);
+    addParagraph(modalBody, lesson.example);
+
+    lessonModal.hidden = false;
+    document.body.style.overflow = "hidden";
+    closeModal.focus();
+}
+
+function hideLesson() {
+    lessonModal.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocusedElement) lastFocusedElement.focus();
+}
+
+document.querySelectorAll("[data-open]").forEach(function (button) {
+    button.addEventListener("click", function () {
+        openLesson(button.dataset.open);
+    });
+});
+
+closeModal.addEventListener("click", hideLesson);
+modalDone.addEventListener("click", hideLesson);
+
+lessonModal.querySelector("[data-close-modal]")
+    .addEventListener("click", hideLesson);
+
+document.addEventListener("keydown", function (event) {
+    if (!lessonModal.hidden && event.key === "Escape") {
+        hideLesson();
+    }
+});
+
+
+/* =====================================
+   4. FUNGSI VALIDASI DAN FORMAT RUPIAH
+===================================== */
+
+const rupiah = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+});
+
+function readNumber(id) {
+    const input = document.getElementById(id);
+    const raw = input.value.trim();
+    const value = Number(raw);
+
+    if (
+        raw === "" ||
+        !Number.isFinite(value) ||
+        value < 0
+    ) {
+        return null;
+    }
+
+    return value;
+}
+
+function showResult(id, message) {
+    document.getElementById(id).textContent = message;
+}
+
+
+/* =====================================
+   5. KALKULATOR ANGGARAN
+===================================== */
+
+document.getElementById("budgetBtn")
+    .addEventListener("click", function () {
+        const income = readNumber("income");
+        const expense = readNumber("expense");
+
+        if (income === null || expense === null) {
+            showResult(
+                "budgetResult",
+                "Isi kedua kolom dengan angka yang valid dan tidak negatif."
+            );
+            return;
+        }
+
+        const remaining = income - expense;
+
+        if (remaining > 0) {
+            showResult(
+                "budgetResult",
+                "Sisa uang: " + rupiah.format(remaining) +
+                ". Pertimbangkan kebutuhan mendatang dan dana darurat."
+            );
+        } else if (remaining === 0) {
+            showResult(
+                "budgetResult",
+                "Anggaran seimbang. Seluruh uang yang dihitung telah dialokasikan."
+            );
+        } else {
+            showResult(
+                "budgetResult",
+                "Defisit: " + rupiah.format(Math.abs(remaining)) +
+                ". Pengeluaran melebihi uang yang tersedia."
+            );
+        }
+    });
+
+
+/* =====================================
+   6. KALKULATOR LABA USAHA
+===================================== */
+
+document.getElementById("profitBtn")
+    .addEventListener("click", function () {
+        const units = readNumber("units");
+        const price = readNumber("price");
+        const cost = readNumber("cost");
+
+        if (units === null || price === null || cost === null) {
+            showResult(
+                "profitResult",
+                "Isi semua kolom dengan angka valid dan tidak negatif."
+            );
+            return;
+        }
+
+        if (
+            !Number.isSafeInteger(units) ||
+            units > 1000000000 ||
+            !Number.isSafeInteger(price) ||
+            price > 1000000000000 ||
+            !Number.isSafeInteger(cost) ||
+            cost > 100000000000000
+        ) {
+            showResult(
+                "profitResult",
+                "Gunakan bilangan bulat dalam batas yang wajar."
+            );
+            return;
+        }
+
+        const revenue = units * price;
+        const profit = revenue - cost;
+
+        if (!Number.isSafeInteger(revenue) || !Number.isSafeInteger(profit)) {
+            showResult(
+                "profitResult",
+                "Angka terlalu besar untuk dihitung dengan aman."
+            );
+            return;
+        }
+
+        const margin = revenue > 0
+            ? (profit / revenue) * 100
+            : null;
+
+        let message =
+            "Omzet: " + rupiah.format(revenue) +
+            "\nTotal biaya: " + rupiah.format(cost);
+
+        if (profit > 0) {
+            message += "\nLaba sederhana: " + rupiah.format(profit);
+        } else if (profit === 0) {
+            message += "\nHasil: impas berdasarkan biaya yang dimasukkan.";
+        } else {
+            message += "\nRugi sederhana: " + rupiah.format(Math.abs(profit));
+        }
+
+        if (margin !== null) {
+            message += "\nMargin laba: " + margin.toFixed(2) + "%";
+        } else {
+            message += "\nMargin tidak dapat dihitung karena omzet nol.";
+        }
+
+        showResult("profitResult", message);
+    });
+
+
+/* =====================================
+   7. SIMULASI TABUNGAN
+===================================== */
+
+document.getElementById("savingBtn")
+    .addEventListener("click", function () {
+        const initial = readNumber("saving");
+        const monthly = readNumber("monthly");
+        const months = readNumber("months");
+
+        if (
+            initial === null ||
+            monthly === null ||
+            months === null ||
+            months < 1 ||
+            months > 600 ||
+            !Number.isSafeInteger(months) ||
+            !Number.isSafeInteger(initial) ||
+            !Number.isSafeInteger(monthly)
+        ) {
+            showResult(
+                "savingResult",
+                "Masukkan tabungan awal dan setoran bulanan berupa bilangan bulat tidak negatif, serta durasi 1–600 bulan."
+            );
+            return;
+        }
+
+        const total = initial + monthly * months;
+
+        if (!Number.isSafeInteger(total)) {
+            showResult(
+                "savingResult",
+                "Angka terlalu besar untuk dihitung dengan aman."
+            );
+            return;
+        }
+
+        showResult(
+            "savingResult",
+            "Perkiraan tabungan setelah " + months +
+            " bulan: " + rupiah.format(total) +
+            ". Perhitungan ini belum memperhitungkan bunga, biaya, dan inflasi."
+        );
+    });
+
+
+/* =====================================
+   8. KUIS ILMU EKONOMI
+===================================== */
+
+const questions = [
+    {
+        question: "1. Mengapa kelangkaan menjadi masalah dasar ekonomi?",
+        options: [
+            "Karena semua barang selalu gratis",
+            "Karena sumber daya terbatas sementara kebutuhan beragam",
+            "Karena manusia tidak memiliki kebutuhan",
+            "Karena harga semua barang sama"
+        ],
+        answer: 1,
+        explanation: "Sumber daya terbatas membuat manusia perlu menentukan prioritas."
+    },
+    {
+        question: "2. Kegiatan menghasilkan barang disebut ...",
+        options: ["Konsumsi", "Distribusi", "Produksi", "Inflasi"],
+        answer: 2,
+        explanation: "Produksi menghasilkan atau menambah nilai guna barang dan jasa."
+    },
+    {
+        question: "3. Apa yang dimaksud biaya peluang?",
+        options: [
+            "Semua uang yang disimpan",
+            "Nilai alternatif terbaik yang dikorbankan",
+            "Total jumlah barang yang dibeli",
+            "Pajak yang selalu dibayar perusahaan"
+        ],
+        answer: 1,
+        explanation: "Biaya peluang adalah nilai alternatif terbaik yang dilepaskan saat memilih."
+    },
+    {
+        question: "4. Apa arti inflasi?",
+        options: [
+            "Harga satu barang pasti turun",
+            "Kenaikan harga saham saja",
+            "Kenaikan harga secara umum dan berkelanjutan",
+            "Penurunan semua pendapatan"
+        ],
+        answer: 2,
+        explanation: "Inflasi adalah kenaikan harga barang dan jasa secara umum dan berkelanjutan."
+    },
+    {
+        question: "5. Omzet usaha adalah ...",
+        options: [
+            "Total nilai penjualan",
+            "Total uang yang dipinjam",
+            "Laba setelah semua biaya",
+            "Jumlah karyawan"
+        ],
+        answer: 0,
+        explanation: "Omzet merupakan total penjualan, bukan laba bersih."
+    },
+    {
+        question: "6. Jika pendapatan Rp500.000 dan pengeluaran Rp350.000, sisanya adalah ...",
+        options: [
+            "Rp100.000",
+            "Rp150.000",
+            "Rp200.000",
+            "Rp850.000"
+        ],
+        answer: 1,
+        explanation: "Rp500.000 dikurangi Rp350.000 sama dengan Rp150.000."
+    },
+    {
+        question: "7. Apa yang dipelajari ekonomi mikro?",
+        options: [
+            "Hanya hubungan antarnegara",
+            "Keputusan konsumen dan perusahaan",
+            "Hanya cuaca dunia",
+            "Hanya jumlah penduduk"
+        ],
+        answer: 1,
+        explanation: "Ekonomi mikro mempelajari keputusan rumah tangga, konsumen, dan perusahaan."
+    },
+    {
+        question: "8. Apa tujuan utama membuat anggaran pribadi?",
+        options: [
+            "Menghabiskan uang secepatnya",
+            "Menghindari pencatatan pengeluaran",
+            "Merencanakan pendapatan dan pengeluaran",
+            "Selalu membeli barang mahal"
+        ],
+        answer: 2,
+        explanation: "Anggaran membantu merencanakan penggunaan uang sesuai kebutuhan dan tujuan."
+    },
+    {
+        question: "9. Dalam ekonomi syariah, akad membantu menjelaskan ...",
+        options: [
+            "Kesepakatan dan ketentuan transaksi",
+            "Warna semua produk",
+            "Cuaca saat transaksi",
+            "Jumlah penduduk"
+        ],
+        answer: 0,
+        explanation: "Akad menjelaskan kesepakatan dan ketentuan transaksi sesuai jenis akadnya."
+    },
+    {
+        question: "10. Jika omzet Rp1.000.000 dan total biaya Rp700.000, laba sederhananya adalah ...",
+        options: [
+            "Rp100.000",
+            "Rp200.000",
+            "Rp300.000",
+            "Rp1.700.000"
+        ],
+        answer: 2,
+        explanation: "Laba sederhana adalah Rp1.000.000 dikurangi Rp700.000, yaitu Rp300.000."
+    }
+];
+
+const questionElement = document.getElementById("question");
+const optionsElement = document.getElementById("options");
+const questionNumber = document.getElementById("questionNumber");
+const quizPoints = document.getElementById("quizPoints");
+const quizFeedback = document.getElementById("quizFeedback");
+const progressBar = document.getElementById("progressBar");
+const nextQuestion = document.getElementById("nextQuestion");
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let quizFinished = false;
+
+function showQuestion() {
+    answered = false;
+    quizFinished = false;
+
+    const item = questions[currentQuestion];
+
+    questionElement.textContent = item.question;
+    questionNumber.textContent =
+        "Pertanyaan " + (currentQuestion + 1) +
+        " dari " + questions.length;
+
+    quizPoints.textContent = "Nilai: " + score;
+    progressBar.style.width =
+        ((currentQuestion + 1) / questions.length * 100) + "%";
+
+    quizFeedback.textContent = "";
+    quizFeedback.className = "";
+    optionsElement.replaceChildren();
+
+    item.options.forEach(function (option, index) {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "option-btn";
+        button.textContent = option;
+
+        button.addEventListener("click", function () {
+            checkAnswer(index);
+        });
+
+        optionsElement.appendChild(button);
+    });
+
+    nextQuestion.disabled = true;
+    nextQuestion.textContent =
+        currentQuestion === questions.length - 1
+            ? "Lihat Hasil Akhir"
+            : "Pertanyaan Berikutnya →";
+}
+
+function checkAnswer(selectedIndex) {
+    if (answered || quizFinished) return;
+
+    answered = true;
+
+    const item = questions[currentQuestion];
+    const buttons = optionsElement.querySelectorAll(".option-btn");
+    const isCorrect = selectedIndex === item.answer;
+
+    if (isCorrect) {
+        score++;
+    }
+
+    buttons.forEach(function (button, index) {
+        button.disabled = true;
+
+        if (index === item.answer) {
+            button.classList.add("correct");
+        }
+
+        if (index === selectedIndex && !isCorrect) {
+            button.classList.add("wrong");
+        }
+    });
+
+    quizFeedback.textContent =
+        (isCorrect ? "Benar! " : "Belum tepat. ") +
+        item.explanation;
+
+    quizFeedback.className = isCorrect ? "success" : "error";
+    quizPoints.textContent = "Nilai: " + score;
+    nextQuestion.disabled = false;
+}
+
+function showFinalResult() {
+    quizFinished = true;
+    progressBar.style.width = "100%";
+
+    questionElement.textContent = "Kuis Selesai! 🎉";
+    questionNumber.textContent = "Hasil akhir";
+    quizPoints.textContent = "Nilai: " + score + "/" + questions.length;
+    optionsElement.replaceChildren();
+
+    const percentage = score / questions.length * 100;
+
+    let message;
+
+    if (percentage === 100) {
+        message = "Sempurna! Kamu menjawab semua pertanyaan dengan benar.";
+    } else if (percentage >= 70) {
+        message = "Bagus! Kamu sudah memahami banyak konsep ekonomi.";
+    } else {
+        message = "Tetap semangat! Baca kembali materi dan coba lagi.";
+    }
+
+    quizFeedback.textContent =
+        message + " Nilai kamu: " + percentage + "/100.";
+    quizFeedback.className = percentage >= 70 ? "success" : "";
+
+    nextQuestion.disabled = false;
+    nextQuestion.textContent = "Ulangi Kuis ↻";
+}
+
+nextQuestion.addEventListener("click", function () {
+    if (quizFinished) {
+        currentQuestion = 0;
+        score = 0;
+        showQuestion();
+        return;
+    }
+
+    if (!answered) return;
+
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion();
+    } else {
+        showFinalResult();
+    }
+});
+
+
+/* =====================================
+   9. JALANKAN SAAT HALAMAN DIBUKA
+===================================== */
+
+showQuestion();
+filterMaterials();
+
+console.log("Ruang Ekonomi siap digunakan!");

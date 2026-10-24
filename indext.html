@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website edukasi untuk mempelajari ilmu ekonomi, bisnis, keuangan, dan ekonomi syariah.">
+    <title>Ruang Ekonomi | Belajar Ekonomi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <nav class="navbar container">
+        <a href="#beranda" class="logo">Ruang<span>Ekonomi.</span></a>
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Buka menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="#beranda">Beranda</a>
+            <a href="#materi">Materi</a>
+            <a href="#simulasi">Simulasi</a>
+            <a href="#kuis">Kuis</a>
+            <a href="#tentang">Tentang</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <!-- BERANDA -->
+    <section class="hero" id="beranda">
+        <div class="container hero-grid">
+            <div>
+                <span class="eyebrow">PLATFORM PEMBELAJARAN EKONOMI</span>
+                <h1>Memahami Ekonomi,<br>
+                    <span>Membangun Masa Depan.</span>
+                </h1>
+                <p class="hero-description">
+                    Pelajari bagaimana manusia memenuhi kebutuhan,
+                    mengelola keuangan, menjalankan bisnis, dan
+                    mengambil keputusan ekonomi secara bijak.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#materi" class="btn btn-primary">Mulai Belajar ↗</a>
+                    <a href="#simulasi" class="btn btn-outline">Coba Simulasi</a>
+                </div>
+                <div class="hero-stats">
+                    <div><strong>12+</strong><span>Topik belajar</span></div>
+                    <div><strong>3</strong><span>Simulasi ekonomi</span></div>
+                    <div><strong>10</strong><span>Soal kuis</span></div>
+                </div>
+            </div>
+            <div class="hero-art">
+                <div class="art-icon">📈</div>
+                <div class="floating-card">
+                    <span>💰</span>
+                    <div><strong>Kelola Keuangan</strong>
+                        <small>Mulai dari keputusan kecil</small></div>
+                </div>
+                <h3>Ekonomi Ada di Sekitar Kita</h3>
+                <p>Dari belanja harian hingga perdagangan dunia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PENGANTAR -->
+    <section class="section container" id="pengantar">
+        <div class="section-heading">
+            <span class="eyebrow">MENGENAL ILMU EKONOMI</span>
+            <h2>Apa Itu Ilmu Ekonomi?</h2>
+            <p>Memahami pilihan manusia dalam menggunakan sumber daya
+               untuk memenuhi berbagai kebutuhan hidup.</p>
+        </div>
+
+        <div class="intro-box">
+            <div class="intro-icon">📚</div>
+            <div>
+                <h3>Pengertian Ilmu Ekonomi</h3>
+                <p>
+                    Ilmu ekonomi adalah ilmu yang mempelajari cara individu,
+                    keluarga, perusahaan, dan pemerintah membuat pilihan
+                    dalam menggunakan sumber daya yang terbatas untuk
+                    memenuhi kebutuhan dan keinginan yang beragam.
+                </p>
+                <p>
+                    Sumber daya seperti uang, waktu, tenaga kerja, bahan baku,
+                    dan lahan tidak selalu tersedia tanpa batas. Karena itu,
+                    manusia perlu menentukan prioritas dan mempertimbangkan
+                    manfaat serta biaya dari setiap keputusan.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATERI -->
+    <section class="section section-soft" id="materi">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">MODUL PEMBELAJARAN</span>
+                <h2>Jelajahi Dunia Ekonomi</h2>
+                <p>Pilih materi untuk membaca penjelasan, contoh,
+                   dan penerapannya dalam kehidupan sehari-hari.</p>
+            </div>
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input type="search" id="searchInput"
+                    placeholder="Cari materi, misalnya inflasi atau pasar..."
+                    aria-label="Cari materi ekonomi">
+            </div>
+
+            <div class="filter-list" id="filterList">
+                <button class="filter-btn active" data-filter="semua">Semua</button>
+                <button class="filter-btn" data-filter="dasar">Dasar Ekonomi</button>
+                <button class="filter-btn" data-filter="mikro">Ekonomi Mikro</button>
+                <button class="filter-btn" data-filter="makro">Ekonomi Makro</button>
+                <button class="filter-btn" data-filter="keuangan">Keuangan</button>
+                <button class="filter-btn" data-filter="syariah">Ekonomi Syariah</button>
+            </div>
+
+            <div class="material-grid" id="materialGrid">
+
+                <article class="material-card" data-category="dasar">
+                    <div class="material-icon">🌱</div>
+                    <span class="tag">DASAR EKONOMI</span>
+                    <h3>1. Kelangkaan dan Pilihan</h3>
+                    <p>
+                        Kelangkaan terjadi ketika sumber daya yang tersedia
+                        terbatas dibandingkan kebutuhan manusia. Kelangkaan
+                        membuat kita harus memilih prioritas.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Kamu memiliki Rp50.000.
+                        Kamu perlu membeli makan dan alat tulis. Kamu harus
+                        membagi uang sesuai kebutuhan paling penting.
+                    </p>
+                    <button class="read-btn" data-open="kelangkaan">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="dasar">
+                    <div class="material-icon">🎯</div>
+                    <span class="tag">DASAR EKONOMI</span>
+                    <h3>2. Kebutuhan dan Keinginan</h3>
+                    <p>
+                        Kebutuhan adalah sesuatu yang diperlukan untuk
+                        kehidupan atau mencapai tujuan. Keinginan adalah
+                        sesuatu yang ingin dimiliki, tetapi tidak selalu
+                        harus dipenuhi segera.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Makan dan transportasi
+                        untuk bekerja merupakan kebutuhan. Membeli aksesori
+                        baru ketika yang lama masih berfungsi bisa ditunda.
+                    </p>
+                    <button class="read-btn" data-open="kebutuhan">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="dasar">
+                    <div class="material-icon">⚖️</div>
+                    <span class="tag">DASAR EKONOMI</span>
+                    <h3>3. Prinsip Ekonomi</h3>
+                    <p>
+                        Prinsip ekonomi mengarahkan kita agar menggunakan
+                        sumber daya secara efisien untuk memperoleh manfaat
+                        yang sesuai dengan biaya dan tujuan.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Membandingkan harga,
+                        kualitas, dan daya tahan barang sebelum membeli.
+                        Harga termurah tidak selalu memberikan nilai terbaik.
+                    </p>
+                    <button class="read-btn" data-open="prinsip">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="mikro">
+                    <div class="material-icon">🏭</div>
+                    <span class="tag">EKONOMI MIKRO</span>
+                    <h3>4. Produksi, Distribusi, Konsumsi</h3>
+                    <p>
+                        Produksi menghasilkan barang atau jasa, distribusi
+                        menyalurkannya, dan konsumsi menggunakan barang
+                        atau jasa tersebut untuk memenuhi kebutuhan.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Petani menanam padi,
+                        pedagang menyalurkan beras, lalu keluarga
+                        membeli beras untuk dimasak.
+                    </p>
+                    <button class="read-btn" data-open="kegiatan">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="mikro">
+                    <div class="material-icon">🛍️</div>
+                    <span class="tag">EKONOMI MIKRO</span>
+                    <h3>5. Permintaan dan Penawaran</h3>
+                    <p>
+                        Permintaan menggambarkan jumlah barang yang ingin
+                        dan mampu dibeli konsumen pada berbagai tingkat
+                        harga. Penawaran menggambarkan jumlah yang ingin
+                        dan mampu dijual produsen.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Ketika harga cabai naik,
+                        sebagian konsumen mengurangi pembelian. Jika harga
+                        jual menarik, petani mungkin terdorong menambah
+                        produksi pada periode berikutnya.
+                    </p>
+                    <button class="read-btn" data-open="pasar">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="mikro">
+                    <div class="material-icon">🏪</div>
+                    <span class="tag">EKONOMI MIKRO</span>
+                    <h3>6. Pasar dan Pembentukan Harga</h3>
+                    <p>
+                        Pasar merupakan tempat atau mekanisme bertemunya
+                        penjual dan pembeli. Interaksi permintaan dan
+                        penawaran membantu membentuk harga pasar.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Harga buah dapat berbeda
+                        antara musim panen dan musim ketika persediaannya
+                        terbatas.
+                    </p>
+                    <button class="read-btn" data-open="harga">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="mikro">
+                    <div class="material-icon">🏢</div>
+                    <span class="tag">EKONOMI MIKRO</span>
+                    <h3>7. Perusahaan dan Biaya Produksi</h3>
+                    <p>
+                        Perusahaan menggabungkan tenaga kerja, modal,
+                        bahan baku, dan teknologi untuk menghasilkan barang
+                        atau jasa. Biaya produksi memengaruhi keputusan
+                        harga dan jumlah produksi.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Penjual baso aci menghitung
+                        biaya tepung, bumbu, kemasan, gas, tenaga kerja,
+                        dan pengiriman sebelum menetapkan harga jual.
+                    </p>
+                    <button class="read-btn" data-open="perusahaan">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="makro">
+                    <div class="material-icon">📊</div>
+                    <span class="tag">EKONOMI MAKRO</span>
+                    <h3>8. Pertumbuhan Ekonomi dan PDB</h3>
+                    <p>
+                        Produk Domestik Bruto (PDB) mengukur nilai barang
+                        dan jasa akhir yang diproduksi di suatu negara
+                        dalam periode tertentu. Pertumbuhan ekonomi
+                        biasanya dilihat dari kenaikan PDB riil.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Ketika kegiatan usaha
+                        meningkat dan produksi barang serta jasa bertambah,
+                        PDB riil dapat tumbuh. Namun, pertumbuhan PDB saja
+                        belum menggambarkan kesejahteraan semua orang.
+                    </p>
+                    <button class="read-btn" data-open="pdb">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="makro">
+                    <div class="material-icon">📈</div>
+                    <span class="tag">EKONOMI MAKRO</span>
+                    <h3>9. Inflasi dan Daya Beli</h3>
+                    <p>
+                        Inflasi adalah kenaikan harga barang dan jasa
+                        secara umum dan berkelanjutan. Inflasi mengurangi
+                        daya beli uang jika pendapatan tidak meningkat
+                        sebanding dengan harga.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Uang Rp20.000 yang dahulu
+                        cukup untuk membeli beberapa barang mungkin
+                        membeli lebih sedikit ketika harga meningkat.
+                    </p>
+                    <button class="read-btn" data-open="inflasi">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="makro">
+                    <div class="material-icon">👥</div>
+                    <span class="tag">EKONOMI MAKRO</span>
+                    <h3>10. Pengangguran dan Kesempatan Kerja</h3>
+                    <p>
+                        Pengangguran terjadi ketika orang yang termasuk
+                        angkatan kerja belum memperoleh pekerjaan.
+                        Penyebabnya dapat berkaitan dengan kondisi ekonomi,
+                        keterampilan, dan ketersediaan lowongan.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Pelatihan keterampilan
+                        komputer dan akuntansi dapat membantu pencari kerja
+                        memenuhi kebutuhan perusahaan.
+                    </p>
+                    <button class="read-btn" data-open="pengangguran">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="keuangan">
+                    <div class="material-icon">💰</div>
+                    <span class="tag">KEUANGAN</span>
+                    <h3>11. Menabung dan Anggaran</h3>
+                    <p>
+                        Anggaran adalah rencana pendapatan dan pengeluaran.
+                        Menabung berarti menyisihkan sebagian pendapatan
+                        untuk kebutuhan masa depan atau tujuan tertentu.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Dari pendapatan Rp2.000.000,
+                        seseorang mengatur kebutuhan pokok, transportasi,
+                        pendidikan, dana darurat, dan tabungan sesuai
+                        keadaan sebenarnya.
+                    </p>
+                    <button class="read-btn" data-open="keuangan">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="keuangan">
+                    <div class="material-icon">📦</div>
+                    <span class="tag">KEUANGAN & BISNIS</span>
+                    <h3>12. Modal, Omzet, dan Laba</h3>
+                    <p>
+                        Modal adalah sumber daya untuk menjalankan usaha.
+                        Omzet merupakan total penjualan, sedangkan laba
+                        adalah selisih pendapatan dan seluruh biaya yang
+                        diperhitungkan dalam periode yang sama.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Penjualan Rp1.000.000
+                        bukan berarti laba Rp1.000.000. Biaya bahan baku,
+                        kemasan, sewa, dan biaya lainnya harus dihitung.
+                    </p>
+                    <button class="read-btn" data-open="bisnis">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="syariah">
+                    <div class="material-icon">🌙</div>
+                    <span class="tag">EKONOMI SYARIAH</span>
+                    <h3>13. Dasar Ekonomi Syariah</h3>
+                    <p>
+                        Ekonomi syariah membahas kegiatan ekonomi
+                        berdasarkan prinsip Islam, termasuk keadilan,
+                        tanggung jawab, transaksi yang jelas, dan
+                        larangan riba dalam transaksi yang diatur syariah.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Akad jual beli menjelaskan
+                        barang, harga, serta persetujuan pihak yang
+                        bertransaksi. Akad pembiayaan syariah memiliki
+                        ketentuan yang perlu dipahami sesuai jenisnya.
+                    </p>
+                    <button class="read-btn" data-open="syariah">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="syariah">
+                    <div class="material-icon">🤝</div>
+                    <span class="tag">EKONOMI SYARIAH</span>
+                    <h3>14. Zakat, Infak, dan Keadilan Sosial</h3>
+                    <p>
+                        Zakat merupakan kewajiban dengan ketentuan tertentu,
+                        sedangkan infak adalah pengeluaran harta untuk
+                        kebaikan. Keduanya dapat berperan dalam membantu
+                        masyarakat dan mendukung kepedulian sosial.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Dana sosial dapat membantu
+                        kebutuhan penerima yang memenuhi ketentuan,
+                        mendukung pendidikan, dan memperkuat kepedulian
+                        terhadap masyarakat.
+                    </p>
+                    <button class="read-btn" data-open="sosial">Pelajari lebih lanjut ↗</button>
+                </article>
+
+                <article class="material-card" data-category="dasar">
+                    <div class="material-icon">🌍</div>
+                    <span class="tag">SISTEM EKONOMI</span>
+                    <h3>15. Sistem Ekonomi</h3>
+                    <p>
+                        Sistem ekonomi menjelaskan bagaimana masyarakat
+                        mengatur produksi, distribusi, dan konsumsi.
+                        Sistem ekonomi pasar, komando, dan campuran
+                        memiliki perbedaan dalam pengambilan keputusan.
+                    </p>
+                    <p class="example">
+                        <strong>Contoh:</strong> Dalam ekonomi campuran,
+                        kegiatan bisnis dapat dijalankan swasta, sementara
+                        pemerintah juga menyediakan layanan publik dan
+                        membuat peraturan.
+                    </p>
+                    <button class="read-btn" data-open="sistem">Pelajari lebih lanjut ↗</button>
+                </article>
+
+            </div>
+            <p id="emptyMessage" class="empty-message" hidden>
+                Materi tidak ditemukan. Coba kata kunci lain.
+            </p>
+        </div>
+    </section>
+
+    <!-- PEMBAHASAN LANJUTAN -->
+    <section class="section container" id="pembahasan">
+        <div class="section-heading">
+            <span class="eyebrow">BELAJAR LEBIH DALAM</span>
+            <h2>Konsep Penting dalam Ekonomi</h2>
+            <p>Memahami teori dasar melalui penjelasan dan contoh sederhana.</p>
+        </div>
+
+        <div class="lesson-list">
+            <details open>
+                <summary>1. Biaya peluang (opportunity cost)</summary>
+                <div class="lesson-content">
+                    <p>Biaya peluang adalah nilai alternatif terbaik yang
+                    dikorbankan ketika kita memilih satu pilihan daripada
+                    pilihan lainnya.</p>
+                    <p>Misalnya, kamu memiliki waktu dua jam. Kamu memilih
+                    bekerja dengan penghasilan Rp40.000 daripada mengikuti
+                    kegiatan lain. Jika kegiatan yang dikorbankan adalah
+                    alternatif terbaikmu, nilai manfaat alternatif itu
+                    merupakan biaya peluang.</p>
+                    <p><strong>Manfaat:</strong> konsep ini membantu kita
+                    mempertimbangkan bukan hanya uang yang dibayar, tetapi
+                    juga kesempatan yang hilang.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>2. Permintaan, penawaran, dan keseimbangan pasar</summary>
+                <div class="lesson-content">
+                    <p>Secara umum, dengan faktor lain tetap, kenaikan harga
+                    mengurangi jumlah yang diminta dan meningkatkan jumlah
+                    yang ditawarkan. Keseimbangan pasar terjadi pada harga
+                    ketika jumlah yang diminta sama dengan jumlah yang
+                    ditawarkan.</p>
+                    <p>Jika permintaan meningkat sementara penawaran belum
+                    berubah, harga cenderung naik. Sebaliknya, penawaran
+                    yang bertambah ketika permintaan tetap dapat menekan
+                    harga. Hasil nyata juga dipengaruhi biaya, kebijakan,
+                    ekspektasi, dan kondisi pasar.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>3. Perbedaan ekonomi mikro dan makro</summary>
+                <div class="lesson-content">
+                    <p><strong>Ekonomi mikro</strong> mempelajari keputusan
+                    konsumen, rumah tangga, dan perusahaan, termasuk harga
+                    barang serta persaingan bisnis.</p>
+                    <p><strong>Ekonomi makro</strong> mempelajari
+                    perekonomian secara keseluruhan, seperti inflasi,
+                    pengangguran, pertumbuhan ekonomi, dan kebijakan
+                    moneter maupun fiskal.</p>
+                    <p>Keduanya saling berkaitan. Perubahan inflasi
+                    misalnya dapat memengaruhi keputusan belanja keluarga
+                    dan biaya produksi perusahaan.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>4. Fungsi uang dan lembaga keuangan</summary>
+                <div class="lesson-content">
+                    <p>Uang berfungsi sebagai alat tukar, satuan hitung,
+                    dan penyimpan nilai, meskipun daya belinya dapat
+                    berubah dari waktu ke waktu.</p>
+                    <p>Bank dan lembaga keuangan lainnya menyediakan
+                    layanan seperti penyimpanan dana, pembayaran,
+                    pembiayaan, dan pengelolaan risiko sesuai izin
+                    serta ketentuan yang berlaku.</p>
+                    <p>Memahami biaya layanan, risiko, hak konsumen,
+                    dan syarat produk keuangan membantu seseorang
+                    mengambil keputusan yang lebih terinformasi.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>5. Peran pemerintah dalam perekonomian</summary>
+                <div class="lesson-content">
+                    <p>Pemerintah dapat menyediakan barang publik,
+                    membangun infrastruktur, menetapkan aturan,
+                    mengumpulkan pajak, dan menjalankan kebijakan
+                    untuk memengaruhi perekonomian.</p>
+                    <p>Kebijakan fiskal berkaitan dengan penerimaan
+                    dan pengeluaran pemerintah. Kebijakan moneter
+                    berkaitan dengan pengelolaan kondisi moneter,
+                    yang di Indonesia menjadi ranah Bank Indonesia
+                    sesuai mandatnya.</p>
+                    <p>Setiap kebijakan memiliki manfaat, biaya,
+                    dan konsekuensi yang perlu dinilai secara cermat.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>6. Ekonomi digital dan peluang usaha</summary>
+                <div class="lesson-content">
+                    <p>Ekonomi digital menggunakan teknologi untuk
+                    mendukung perdagangan, pembayaran, komunikasi,
+                    dan penyediaan layanan. Contohnya toko online,
+                    pemasaran digital, aplikasi keuangan, serta
+                    layanan berbasis internet.</p>
+                    <p>Teknologi dapat memperluas jangkauan pelanggan
+                    dan mengurangi beberapa hambatan usaha, tetapi
+                    pelaku usaha tetap harus menghitung biaya platform,
+                    iklan, pengiriman, retur, keamanan data, dan
+                    persaingan.</p>
+                    <p>Usaha digital yang baik tidak hanya mengejar
+                    omzet, tetapi juga memperhatikan laba, arus kas,
+                    kepuasan pelanggan, dan keberlanjutan bisnis.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- SIMULASI -->
+    <section class="section section-soft" id="simulasi">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">PRAKTIK LANGSUNG</span>
+                <h2>Laboratorium Ekonomi</h2>
+                <p>Gunakan angka contoh untuk memahami keputusan
+                   keuangan dan perhitungan usaha.</p>
+            </div>
+
+            <div class="sim-grid">
+                <div class="sim-card">
+                    <span class="sim-icon">💳</span>
+                    <h3>1. Kalkulator Anggaran</h3>
+                    <p>Hitung sisa uang setelah pengeluaran.</p>
+                    <label for="income">Total uang (Rp)</label>
+                    <input type="number" id="income" min="0"
+                           placeholder="Contoh: 2000000">
+                    <label for="expense">Total pengeluaran (Rp)</label>
+                    <input type="number" id="expense" min="0"
+                           placeholder="Contoh: 1500000">
+                    <button class="btn btn-primary full-btn" id="budgetBtn">
+                        Hitung Anggaran
+                    </button>
+                    <div class="result" id="budgetResult" aria-live="polite">
+                        Hasil akan muncul di sini.
+                    </div>
+                </div>
+
+                <div class="sim-card">
+                    <span class="sim-icon">🧁</span>
+                    <h3>2. Kalkulator Laba Usaha</h3>
+                    <p>Bandingkan omzet dengan seluruh biaya usaha.</p>
+                    <label for="units">Jumlah produk terjual</label>
+                    <input type="number" id="units" min="0"
+                           placeholder="Contoh: 100">
+                    <label for="price">Harga jual per produk (Rp)</label>
+                    <input type="number" id="price" min="0"
+                           placeholder="Contoh: 10000">
+                    <label for="cost">Total biaya usaha (Rp)</label>
+                    <input type="number" id="cost" min="0"
+                           placeholder="Contoh: 650000">
+                    <button class="btn btn-primary full-btn" id="profitBtn">
+                        Hitung Laba
+                    </button>
+                    <div class="result" id="profitResult" aria-live="polite">
+                        Hasil akan muncul di sini.
+                    </div>
+                </div>
+
+                <div class="sim-card">
+                    <span class="sim-icon">🐷</span>
+                    <h3>3. Simulasi Tabungan</h3>
+                    <p>Perkirakan tabungan berdasarkan setoran rutin.</p>
+                    <label for="saving">Tabungan awal (Rp)</label>
+                    <input type="number" id="saving" min="0"
+                           placeholder="Contoh: 100000">
+                    <label for="monthly">Setoran per bulan (Rp)</label>
+                    <input type="number" id="monthly" min="0"
+                           placeholder="Contoh: 200000">
+                    <label for="months">Lama menabung (bulan)</label>
+                    <input type="number" id="months" min="1" max="600"
+                           placeholder="Contoh: 12">
+                    <button class="btn btn-primary full-btn" id="savingBtn">
+                        Hitung Tabungan
+                    </button>
+                    <div class="result" id="savingResult" aria-live="polite">
+                        Hasil akan muncul di sini.
+                    </div>
+                </div>
+            </div>
+            <p class="note">
+                Catatan: Simulasi menggunakan asumsi sederhana tanpa
+                bunga, pajak, inflasi, atau biaya tambahan kecuali
+                disebutkan. Hasil bukan jaminan keuntungan usaha.
+            </p>
+        </div>
+    </section>
+
+    <!-- KUIS -->
+    <section class="section container" id="kuis">
+        <div class="section-heading">
+            <span class="eyebrow">UJI PENGETAHUANMU</span>
+            <h2>Kuis Ilmu Ekonomi</h2>
+            <p>Jawab sepuluh pertanyaan untuk menguji pemahamanmu.</p>
+        </div>
+
+        <div class="quiz-box">
+            <div class="quiz-top">
+                <span id="questionNumber">Pertanyaan 1 dari 10</span>
+                <span id="quizPoints">Nilai: 0</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <h3 id="question">Pertanyaan akan muncul di sini.</h3>
+            <div class="options" id="options"></div>
+            <p id="quizFeedback" aria-live="polite"></p>
+            <button class="btn btn-primary" id="nextQuestion" disabled>
+                Pertanyaan Berikutnya →
+            </button>
+        </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="about-section" id="tentang">
+        <div class="container about-content">
+            <span class="eyebrow">BELAJAR SEPANJANG HAYAT</span>
+            <h2>Ekonomi Bukan Hanya Tentang Uang.</h2>
+            <p>
+                Ekonomi juga membahas pilihan, prioritas, produksi,
+                kesejahteraan, kesempatan, dan cara menggunakan sumber
+                daya dengan bertanggung jawab. Pemahaman ekonomi
+                membantu kita menjadi konsumen yang bijak, pekerja
+                yang produktif, serta pelaku usaha yang lebih terencana.
+            </p>
+            <a href="#materi" class="btn btn-light">Jelajahi Materi Lagi ↑</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <a href="#beranda" class="logo footer-logo">Ruang<span>Ekonomi.</span></a>
+        <p>Media belajar ekonomi untuk semua.</p>
+        <p class="copyright">© 2026 Ruang Ekonomi. Dibuat untuk pendidikan.</p>
+    </div>
+</footer>
+
+<!-- MODAL PEMBAHASAN -->
+<div class="modal" id="lessonModal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-content" role="dialog"
+         aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="closeModal"
+                aria-label="Tutup pembahasan">×</button>
+        <span class="eyebrow">PEMBAHASAN LENGKAP</span>
+        <h2 id="modalTitle"></h2>
+        <div id="modalBody" class="modal-body"></div>
+        <button class="btn btn-primary" id="modalDone">Selesai Membaca</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
